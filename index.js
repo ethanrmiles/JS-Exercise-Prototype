@@ -96,10 +96,21 @@ mark.poop()
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-  
+function Car(model, milesPerGallon) {
+  this.model = model;
+  this.milesPerGallon = milesPerGallon
+  this.tank = 0
+  this.odometer = 0
 }
 
+Car.prototype.fill = function(gallons) {
+  this.tank = this.tank + gallons
+}
+
+const e21 = new Car('BMW 318is', 20);
+// console.log(e21) 
+e21.fill(10)
+// console.log(e21)
 
 /*
   TASK 3
@@ -108,18 +119,28 @@ function Car() {
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
- 
+function Baby(name, age, favoriteToy) {
+ Person.call(this, name, age,)
+ this.favoriteToy = favoriteToy
 }
 
+Baby.prototype = Object.create(Person.prototype);
+
+Baby.prototype.play = function(){
+  return `Joey's favorite thing is Playing with his ${this.favoriteToy}`
+}
+
+const joey = new Baby('Joey', 4, 'chainsaw')
+console.log(joey)
+console.log(joey.play())
 
 /* 
   TASK 4
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. Global binding- this is when a this is declared that references something in global scope. This will return the window of the browser, which is not a good thing. Something needs to be fixed when this happens. 
+  2. Implicit binding- This occurs when when the object is bound to what is to the left of the . 
+  3. New binding- This occurs when creating new objects of something. Declare your new function and use the 'new' keyword to point to your constructor. This creates a new instance of the function
+  4. Explicit binding- must use one of the correct keyword, to explicitly bind one key to an object. 
 */
 
 
